@@ -6,10 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene: MonoBehaviour
 {
-    public void LoadGame()
+    public void LoadGame(int load)
     {
-        
-        SceneManager.LoadScene(1);
-        UnityEngine.Debug.Log("loadgame");
+        SceneManager.LoadScene(load);
     }
 }
