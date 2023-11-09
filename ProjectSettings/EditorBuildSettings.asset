@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PunchScene.unity
     guid: 2ce5b5903e9b9a643a7dd47785cc792b
+  - enabled: 1
+    path: Assets/Scenes/PartTimeScene.unity
+    guid: e0793207024fee845b559a1916f40622
   m_configObjects: {}
