@@ -41,9 +41,4 @@ public class PunchPrologue : MonoBehaviour
             howToPlayPanel.SetActive(true);  //게임방법 패널 보이게
         }
     }
-    public void gameStart(){
-        howToPlayPanel.SetActive(false);  //게임방법 패널 안 보이게
-        gaugeBar.SetActive(true);  //게이지바 보이게
-        bubbleText.text = "어디 한 번 막아보시지!";
-    }
 }
