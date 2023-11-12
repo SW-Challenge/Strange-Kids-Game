@@ -41,6 +41,16 @@ public class CalCulateCheckScript : MonoBehaviour
             String[] sayText = { "(( 이게 된다고?? ))", "(( 뭐야~ 이 편의점 다시 와야하나? ))" };
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
             GameObject.Find("Human").GetComponent<PartTimeScript>().heart--;
+
+            if(GameObject.Find("Human").GetComponent<PartTimeScript>().heart == 1)
+            {
+                GameObject.Find("heart").SetActive(false);
+            }
+
+            else
+            {
+                GameObject.Find("heart (1)").SetActive(false);
+            }
         }
 
         Invoke("AgainStart", 3.0f);
