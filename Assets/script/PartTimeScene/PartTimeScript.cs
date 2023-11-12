@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 public class PartTimeScript : MonoBehaviour
 {
     public Sprite[] sprites;
-    float[] time = { 4.0f, 6.0f, 8.0f, 5.3f, 12.0f, 3.5f };
+    float[] doorBellSount = { 2.5f, 4.5f, 6.5f, 3.8f, 8.5f, 2.0f };
     int cnt = 0;
 
     public int heart = 2;
@@ -29,10 +29,14 @@ public class PartTimeScript : MonoBehaviour
 
     public void SetTimeAfter()
     {
-        Invoke("SetActiveObject", time[cnt]);
-        Debug.Log(cnt);
+        Invoke("SetDoorBellSound", doorBellSount[cnt]);
+    }
+
+    void SetDoorBellSound()
+    {
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
+        Invoke("SetActiveObject", 2.0f);
         cnt++;
-        Debug.Log(cnt);
     }
 
     void SetActiveObject()
