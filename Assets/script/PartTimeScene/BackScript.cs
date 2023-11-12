@@ -11,14 +11,14 @@ using System.Text.RegularExpressions;
 
 public class BackScript : MonoBehaviour
 {
-    public GameObject back;
+    public GameObject backBtn;
     GameObject say;
 
     public void Start()
     {
-        back = GameObject.Find("Back");
+        backBtn = GameObject.Find("Back");
+        backBtn.SetActive(false);
         say = GameObject.Find("SayText");
-        back.SetActive(false);
     }
 
     public void ClickButton()
