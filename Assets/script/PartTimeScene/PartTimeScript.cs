@@ -20,6 +20,8 @@ public class PartTimeScript : MonoBehaviour
 
     public void Start()
     {
+        if (heart == 0 || cnt == 6) GameObject.Find("EventSystem").GetComponent<LoadScene1>().LoadGame(1);
+
         say = GameObject.Find("SayText");
         gameObject.SetActive(false);
         SetTimeAfter();
