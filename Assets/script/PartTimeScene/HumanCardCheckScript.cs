@@ -30,7 +30,7 @@ public class HumanCardCheckScript : MonoBehaviour
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
             
             // 신분증 꺼내기
-            Invoke("HumanCardSetActive", 4.0f);
+            Invoke("HumanCardSetActive", 2.0f);
 
             GameObject.Find("EventSystem").GetComponent<CalCulateCheckScript1>().calY.SetActive(true);
             GameObject.Find("EventSystem").GetComponent<BackScript>().backBtn.SetActive(true);
@@ -43,7 +43,7 @@ public class HumanCardCheckScript : MonoBehaviour
             say.GetComponent<SayTextScript>().RandomSaid(sayText1);
 
             // 신분증 꺼내기
-            Invoke("HumanCardSetActive", 4.0f);
+            Invoke("HumanCardSetActive", 2.0f);
 
             // 손님의 sprite를 가지고 동일한 신분증 꺼내기
             String humanScript = human.GetComponent<SpriteRenderer>().sprite.ToString();
