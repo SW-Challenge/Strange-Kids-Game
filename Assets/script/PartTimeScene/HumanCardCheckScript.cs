@@ -28,12 +28,12 @@ public class HumanCardCheckScript : MonoBehaviour
         {
             // 말풍선 변경
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
-
-            GameObject.Find("EventSystem").GetComponent<CalCulateCheckScript1>().calY.SetActive(true);
-            GameObject.Find("EventSystem").GetComponent<BackScript>().back.SetActive(true);
             
             // 신분증 꺼내기
             Invoke("HumanCardSetActive", 4.0f);
+
+            GameObject.Find("EventSystem").GetComponent<CalCulateCheckScript1>().calY.SetActive(true);
+            GameObject.Find("EventSystem").GetComponent<BackScript>().backBtn.SetActive(true);
         }
 
         else
@@ -53,7 +53,7 @@ public class HumanCardCheckScript : MonoBehaviour
             GameObject.Find("EventSystem").GetComponent<HumanCardScript>().humanCard.GetComponent<SpriteRenderer>().sprite = GameObject.Find("EventSystem").GetComponent<HumanCardScript>().sprites[humanScriptNumber];
 
             GameObject.Find("EventSystem").GetComponent<CalCulateCheckScript1>().calY.SetActive(true);
-            GameObject.Find("EventSystem").GetComponent<BackScript>().back.SetActive(true);
+            GameObject.Find("EventSystem").GetComponent<BackScript>().backBtn.SetActive(true);
         }
     }
 

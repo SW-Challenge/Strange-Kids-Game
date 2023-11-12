@@ -54,8 +54,11 @@ public class CalCulateCheckScript : MonoBehaviour
         GameObject.Find("SpeechBubble").GetComponent<PartTimeScript>().Start();
         GameObject.Find("SayText").GetComponent<SayTextScript>().Start();
 
+        GameObject.Find("EventSystem").GetComponent<HumanCardScript>().humanCard.SetActive(true);
         GameObject.Find("EventSystem").GetComponent<HumanCardScript>().Start();
+        GameObject.Find("EventSystem").GetComponent<BackScript>().backBtn.SetActive(true);
         GameObject.Find("EventSystem").GetComponent<BackScript>().Start();
+        GameObject.Find("EventSystem").GetComponent<CalCulateCheckScript1>().calY.SetActive(true);
         GameObject.Find("EventSystem").GetComponent<CalCulateCheckScript1>().Start();
     }
 }
