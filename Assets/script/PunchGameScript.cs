@@ -1,80 +1,118 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class PunchGameScript : MonoBehaviour
 {
-    public TMP_Text keyText; // 랜덤으로 선택된 키를 표시할 텍스트
-    public GameObject fist; // 주먹
-    public GameObject howToPlayPanel;  //게임 방법 패널
-    public GameObject gaugeBar;  //체력바
-    public TMP_Text bubbleText;  //잼민이 말풍선 대사
+    public TMP_Text keyText;  // 랜덤키를 텍스트
+    public GameObject fist;   // 주먹 오브젝트
+    public GameObject fistOutline;  // 주먹 판정선 오브젝트
+    public GameObject howToPlayPanel;  // 게임 방법 패널
+    public GameObject gaugeBar;  // 체력바
+    public Image gaugeBarImage;  // 체력바 이미지
+    public TMP_Text bubbleText;  // 잼민이 말풍선 대사
 
-    private KeyCode randomKey; // 랜덤으로 선택된 키를 저장할 변수
-    private float timer = 3f; // 주어진 시간(3초) 내에 키를 눌러야 함
-    private bool isStart = false;  //게임 시작했나 안했나
+    private KeyCode randomKey;  // 랜덤으로 선택된 키를 저장할 변수
 
+    // 게임 시작 함수
     public void gameStart()
     {
-        howToPlayPanel.SetActive(false);  //게임방법 패널 안 보이게
-        gaugeBar.SetActive(true);  //게이지바 보이게
-        bubbleText.text = "어디 한 번 막아보시지!";
-        isStart = true;  //게임 시작
-        fist.SetActive(true);  //주먹 보이게
-        SpawnFist(); // 게임 시작 시 주먹 생성
+        howToPlayPanel.SetActive(false);  // 게임방법 패널 비활성화
+        gaugeBar.SetActive(true);  // 체력바 활성화
+        bubbleText.text = "어디 한 번 막아보시지!";  // 말풍선 대사 설정
+        StartCoroutine(RandomDelayedSpawn());  // 랜덤 딜레이 후 주먹 생성 코루틴 시작
     }
 
-    void Update()
+    // 성공 함수
+    void Pass()
     {
-        if (isStart)
-        {
-            timer -= Time.deltaTime;
+        bubbleText.text = "오; 꽤 하는데?";
+        Debug.Log(randomKey + " : 성공");
+        StartCoroutine(RandomDelayedSpawn());  // 새로운 주먹 생성
+        fist.SetActive(false);  // 주먹 활성화
+        fistOutline.SetActive(false);  // 주먹 판정선 활성화
+    }
 
-            if (timer <= 0f)
+    // 실패 함수
+    void Fail()
+    {
+        Debug.Log(randomKey + " : 실패");
+        bubbleText.text = "슈슈슉슈슉ㅋㅋ 못 막았쥬?";
+        gaugeBarImage.fillAmount -= 0.1f;  // 체력 감소
+        StartCoroutine(RandomDelayedSpawn());  // 새로운 주먹 생성
+        fist.SetActive(false);  // 주먹 활성화
+        fistOutline.SetActive(false);  // 주먹 판정선 활성화
+    }
+
+    // 랜덤 딜레이 후 주먹 생성 코루틴
+    IEnumerator RandomDelayedSpawn()
+    {
+        yield return new WaitForSeconds(Random.Range(1f, 5f));  // 1초에서 5초 사이의 랜덤한 시간 딜레이
+        SpawnFist();  // 주먹 생성
+        fist.SetActive(true);  // 주먹 활성화
+        fistOutline.SetActive(true);  // 주먹 판정선 활성화
+    }
+
+    // 주먹 판정선 줄어드는 애니메이션 함수
+    IEnumerator ScaleAnimation()
+    {
+        float targetScale = 47f;
+        float startScale = fistOutline.transform.localScale.x;
+        float speed = 30f;  // 일정 속도
+
+        while (fistOutline.transform.localScale.x > targetScale)
+        {
+            float currentScale = fistOutline.transform.localScale.x;
+            float newScale = currentScale - speed * Time.deltaTime;
+
+            if (newScale < targetScale)
+                newScale = targetScale;
+
+            fistOutline.transform.localScale = new Vector3(newScale, newScale, 1f);
+
+            // 주먹 판정선이 주먹과 안맞으면 실패
+            if (Input.GetKeyDown(randomKey) && newScale <= 54 && newScale >= 47f)
             {
-                Fail();
+                Pass();  // 성공
+                yield break;
             }
-            CheckInput();
+            else if(Input.anyKeyDown || newScale == 47f)
+            {
+                Fail();  // 실패
+                yield break;
+            }
+            yield return null;
         }
     }
 
-    // 랜덤으로 주먹을 생성하는 함수
+    // 주먹 생성 함수
     void SpawnFist()
     {
+        // 랜덤 키
         char randomChar = (char)Random.Range('A', 'Z' + 1);
         randomKey = (KeyCode)System.Enum.Parse(typeof(KeyCode), randomChar.ToString());
 
-        // 랜덤한 위치 계산
+        // 랜덤 위치 설정
+        Vector3 randomPosition = GetRandomPosition();
+        // 주먹 위치 설정
+        fist.transform.position = randomPosition;
+        // 키 텍스트 설정
+        keyText.text = randomKey.ToString();
+
+        // 주먹 판정선 크기 초기화
+        fistOutline.transform.localScale = new Vector3(80f, 80f, 1f);
+        // 주먹 판정선 위치 설정
+        fistOutline.transform.position = fist.GetComponent<Renderer>().bounds.center;
+        // fistOutline.transform.position = randomPosition;
+        StartCoroutine(ScaleAnimation());
+    }
+
+    // 랜덤 위치 생성 함수
+    Vector3 GetRandomPosition()
+    {
         float x = Random.Range(Screen.width * 0.1f, Screen.width * 0.9f);
         float y = Random.Range(Screen.height * 0.2f, Screen.height * 0.6f);
-
-        Vector3 randomPosition = new Vector3(x, y, 0f);
-
-        // 주먹 위치 지정
-        fist.transform.position = randomPosition;
-        //키 텍스트 설정
-        keyText.text = randomKey.ToString();
-        timer = 3f; // 타이머 재설정
-    }
-
-    // 입력된 키를 확인하는 함수
-    void CheckInput()
-    {
-        if (Input.GetKeyDown(randomKey))
-        {
-            Pass(); // 정확한 키를 눌렀을 때
-        }
-    }
-
-    void Pass()  //막기 성공
-    {
-        Debug.Log("성공!");
-        SpawnFist(); // 새로운 주먹 생성
-    }
-
-    void Fail()  //막기 실패
-    {
-
+        return new Vector3(x, y, 1f);
     }
 }
