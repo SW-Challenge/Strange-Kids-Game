@@ -11,7 +11,6 @@ public class HumanCardScript : MonoBehaviour
 {
     public GameObject humanCard;
     public Sprite[] sprites;
-    float[] time = { 7.0f, 10.0f, 15.0f, 11.3f, 12.3f, 19.3f };
 
     public void Start()
     {

@@ -43,9 +43,10 @@ public class CalCulateCheckScript1 : MonoBehaviour
         {
             String[] sayText = { "(( 이게 된다고?? ))", "(( 뭐야~ 이 편의점 다시 와야하나? ))" };
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
+            GameObject.Find("Human").GetComponent<PartTimeScript>().heart--;
         }
 
-        Invoke("AgainStart", 5.0f);
+        Invoke("AgainStart", 3.0f);
     }
 
     void AgainStart()
