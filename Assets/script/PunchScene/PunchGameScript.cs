@@ -13,10 +13,11 @@ public class PunchGameScript : MonoBehaviour
     public Image gaugeBarImage;  // 체력바 이미지
     public TMP_Text bubbleText;  // 잼민이 말풍선 대사
 
-    private KeyCode randomKey;  // 랜덤으로 선택된 키를 저장할 변수
+    KeyCode randomKey;  // 랜덤으로 선택된 키를 저장할 변수
+    public int count = 0;  // 주먹 몇 번 생성됐는지
 
     // 게임 시작 함수
-    public void gameStart()
+    public void GameStart()
     {
         howToPlayPanel.SetActive(false);  // 게임방법 패널 비활성화
         gaugeBar.SetActive(true);  // 체력바 활성화
@@ -24,25 +25,27 @@ public class PunchGameScript : MonoBehaviour
         StartCoroutine(RandomDelayedSpawn());  // 랜덤 딜레이 후 주먹 생성 코루틴 시작
     }
 
-    // 성공 함수
+    // 성공
     void Pass()
     {
         bubbleText.text = "오; 꽤 하는데?";
         Debug.Log(randomKey + " : 성공");
-        StartCoroutine(RandomDelayedSpawn());  // 새로운 주먹 생성
-        fist.SetActive(false);  // 주먹 활성화
-        fistOutline.SetActive(false);  // 주먹 판정선 활성화
+        Check();
     }
 
-    // 실패 함수
+    void Check(){
+        fist.SetActive(false);  // 주먹 활성화
+        fistOutline.SetActive(false);  // 주먹 판정선 활성화
+        PunchEndScript.GameOver();
+    }
+
+    // 실패
     void Fail()
     {
         Debug.Log(randomKey + " : 실패");
         bubbleText.text = "슈슈슉슈슉ㅋㅋ 못 막았쥬?";
         gaugeBarImage.fillAmount -= 0.1f;  // 체력 감소
-        StartCoroutine(RandomDelayedSpawn());  // 새로운 주먹 생성
-        fist.SetActive(false);  // 주먹 활성화
-        fistOutline.SetActive(false);  // 주먹 판정선 활성화
+        Check();
     }
 
     // 랜덤 딜레이 후 주먹 생성 코루틴
@@ -89,6 +92,8 @@ public class PunchGameScript : MonoBehaviour
     // 주먹 생성 함수
     void SpawnFist()
     {
+        count++;
+
         // 랜덤 키
         char randomChar = (char)Random.Range('A', 'Z' + 1);
         randomKey = (KeyCode)System.Enum.Parse(typeof(KeyCode), randomChar.ToString());
