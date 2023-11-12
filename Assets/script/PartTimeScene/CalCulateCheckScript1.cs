@@ -45,7 +45,7 @@ public class CalCulateCheckScript1 : MonoBehaviour
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
         }
 
-        Invoke("AgainStart", 5.0f);
+        Invoke("AgainStart", 3.0f);
     }
 
     void AgainStart()

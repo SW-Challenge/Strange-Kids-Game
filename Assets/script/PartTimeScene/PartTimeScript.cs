@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 public class PartTimeScript : MonoBehaviour
 {
     public Sprite[] sprites;
-    float[] time = { 7.0f, 10.0f, 15.0f, 11.3f, 12.3f, 19.3f };
+    float[] time = { 4.0f, 6.0f, 8.0f, 5.3f, 12.0f, 3.5f };
     int cnt = 0;
 
     public int heart = 2;
