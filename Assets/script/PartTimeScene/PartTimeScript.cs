@@ -20,7 +20,11 @@ public class PartTimeScript : MonoBehaviour
 
     public void Start()
     {
-        if (heart == 0 || cnt == 6) GameObject.Find("EventSystem").GetComponent<LoadScene1>().LoadGame(1);
+        if (heart == 0 || cnt == 6)
+        {
+            GameObject.Find("EventSystem").GetComponent<EndingPanelScript>().Ending();
+            return;
+        }
 
         say = GameObject.Find("SayText");
         gameObject.SetActive(false);
@@ -41,6 +45,7 @@ public class PartTimeScript : MonoBehaviour
 
     void SetActiveObject()
     {
+        GameObject.Find("EventSystem").GetComponent<AudioSource>().Play();
         gameObject.SetActive(true);
         SetRandomObject(); 
         say.GetComponent<SayTextScript>().RandomSaid(sayText);

@@ -15,25 +15,14 @@ public class CalCulateCheckScript : MonoBehaviour
     {
         say = GameObject.Find("SayText");
 
-        String humanScript = GameObject.Find("Human").GetComponent<SpriteRenderer>().sprite.ToString();
-        int humanScriptNumber = int.Parse(Regex.Replace(humanScript, @"\D", ""));
-        humanScriptNumber = humanScriptNumber % 2 == 0 ? humanScriptNumber - 1 : humanScriptNumber;
-
-        GameObject.Find("EventSystem").GetComponent<HumanCardScript>().humanCard.SetActive(true);
-
-        String humanCardScript = GameObject.Find("HumanCard").GetComponent<SpriteRenderer>().sprite.ToString();
-        int humanCardScriptNumber = int.Parse(Regex.Replace(humanCardScript, @"\D", ""));
-
-        GameObject.Find("EventSystem").GetComponent<HumanCardScript>().humanCard.SetActive(false);
-
         String productScript = GameObject.Find("Product").GetComponent<SpriteRenderer>().sprite.ToString();
         int productScriptNumber = int.Parse(Regex.Replace(productScript, @"\D", ""));
 
-        // 신분증과 손님의 얼굴이 동일할 시 
-        if (humanScriptNumber == humanCardScriptNumber || productScriptNumber == 3 || productScriptNumber == 4)
+        if (productScriptNumber == 3 || productScriptNumber == 4)
         {
             String[] sayText = { "많이 파세요!", "감사합니다~", "수고하세요~!" };
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
+            GameObject.Find("Correct").GetComponent<AudioSource>().Play();
         }
 
         else
@@ -41,8 +30,10 @@ public class CalCulateCheckScript : MonoBehaviour
             String[] sayText = { "(( 이게 된다고?? ))", "(( 뭐야~ 이 편의점 다시 와야하나? ))" };
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
             GameObject.Find("Human").GetComponent<PartTimeScript>().heart--;
+            GameObject.Find("Fail").GetComponent<AudioSource>().Play();
 
-            if(GameObject.Find("Human").GetComponent<PartTimeScript>().heart == 1)
+
+            if (GameObject.Find("Human").GetComponent<PartTimeScript>().heart == 1)
             {
                 GameObject.Find("heart").SetActive(false);
             }
@@ -58,6 +49,7 @@ public class CalCulateCheckScript : MonoBehaviour
 
     void AgainStart()
     {
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
         GameObject.Find("Human").GetComponent<PartTimeScript>().Start();
         GameObject.Find("Product").GetComponent<PartTimeScript>().Start();
         GameObject.Find("Check").GetComponent<PartTimeScript>().Start();
