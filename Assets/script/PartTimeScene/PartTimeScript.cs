@@ -41,6 +41,7 @@ public class PartTimeScript : MonoBehaviour
 
     void SetActiveObject()
     {
+        GameObject.Find("EventSystem").GetComponent<AudioSource>().Play();
         gameObject.SetActive(true);
         SetRandomObject(); 
         say.GetComponent<SayTextScript>().RandomSaid(sayText);

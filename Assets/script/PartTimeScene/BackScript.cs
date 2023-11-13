@@ -61,6 +61,7 @@ public class BackScript : MonoBehaviour
 
     void AgainStart()
     {
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
         GameObject.Find("Human").GetComponent<PartTimeScript>().Start();
         GameObject.Find("Product").GetComponent<PartTimeScript>().Start();
         GameObject.Find("Check").GetComponent<PartTimeScript>().Start();
