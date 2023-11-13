@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Debug = UnityEngine.Debug;
 using TMPro;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 public class SayTextScript : MonoBehaviour
