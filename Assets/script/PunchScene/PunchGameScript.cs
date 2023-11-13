@@ -12,7 +12,8 @@ public class PunchGameScript : MonoBehaviour
     public GameObject gaugeBar;  // 체력바
     public Image gaugeBarImage;  // 체력바 이미지
     public TMP_Text bubbleText;  // 잼민이 말풍선 대사
-
+    public GameObject jemminAni;  //잼민이 애니메이션
+    public GameObject jemmin;  //잼민이
     KeyCode randomKey;  // 랜덤으로 선택된 키를 저장할 변수
     public int count = 0;  // 주먹 몇 번 생성됐는지
 
@@ -22,6 +23,8 @@ public class PunchGameScript : MonoBehaviour
     // 게임 시작 함수
     public void GameStart()
     {
+        jemmin.SetActive(false);  //잼민이 비활성화
+        jemminAni.SetActive(true);  //잼민이 애니메이션 활성화
         audioSource = GetComponent<AudioSource>();
         howToPlayPanel.SetActive(false);  // 게임방법 패널 비활성화
         gaugeBar.SetActive(true);  // 체력바 활성화
