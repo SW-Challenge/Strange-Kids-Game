@@ -37,6 +37,7 @@ public class CalCulateCheckScript1 : MonoBehaviour
         {
             String[] sayText = { "많이 파세요!", "감사합니다~", "수고하세요~!" };
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
+            GameObject.Find("Correct").GetComponent<AudioSource>().Play();
         }
 
         else
@@ -44,6 +45,8 @@ public class CalCulateCheckScript1 : MonoBehaviour
             String[] sayText = { "(( 이게 된다고?? ))", "(( 뭐야~ 이 편의점 다시 와야하나? ))" };
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
             GameObject.Find("Human").GetComponent<PartTimeScript>().heart--;
+            GameObject.Find("Fail").GetComponent<AudioSource>().Play();
+
 
             if (GameObject.Find("Human").GetComponent<PartTimeScript>().heart == 1)
             {
