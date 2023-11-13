@@ -38,6 +38,7 @@ public class BackScript : MonoBehaviour
             String[] sayText = { "네? 제 얼굴 똑같지 않나요? 왜...", "전 과자를 샀는데 안된다고 하시면...", "...?" };
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
             GameObject.Find("Human").GetComponent<PartTimeScript>().heart--;
+            GameObject.Find("Fail").GetComponent<AudioSource>().Play();
 
             if (GameObject.Find("Human").GetComponent<PartTimeScript>().heart == 1)
             {
@@ -54,6 +55,8 @@ public class BackScript : MonoBehaviour
         {
             String[] sayText = { "칫...", "아니 어딜봐도 내 얼굴인데 왜?", "이 편의점 다시는 안와!" };
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
+            GameObject.Find("Correct").GetComponent<AudioSource>().Play();
+
         }
 
         Invoke("AgainStart", 3.0f);

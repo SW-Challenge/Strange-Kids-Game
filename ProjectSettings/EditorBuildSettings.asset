@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/KeyBoardScene.unity
     guid: 526a2cd5338966841b112f4b140d58b5
+  - enabled: 1
+    path: Assets/Scenes/PartTimeStartScene.unity
+    guid: e396b049b3097da478bc34e0b12aad28
   m_configObjects: {}
