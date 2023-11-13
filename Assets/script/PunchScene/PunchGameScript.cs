@@ -12,13 +12,20 @@ public class PunchGameScript : MonoBehaviour
     public GameObject gaugeBar;  // 체력바
     public Image gaugeBarImage;  // 체력바 이미지
     public TMP_Text bubbleText;  // 잼민이 말풍선 대사
-
+    public GameObject jemminAni;  //잼민이 애니메이션
+    public GameObject jemmin;  //잼민이
     KeyCode randomKey;  // 랜덤으로 선택된 키를 저장할 변수
     public int count = 0;  // 주먹 몇 번 생성됐는지
+
+    AudioSource audioSource;
+    public AudioClip punchSound;
 
     // 게임 시작 함수
     public void GameStart()
     {
+        jemmin.SetActive(false);  //잼민이 비활성화
+        jemminAni.SetActive(true);  //잼민이 애니메이션 활성화
+        audioSource = GetComponent<AudioSource>();
         howToPlayPanel.SetActive(false);  // 게임방법 패널 비활성화
         gaugeBar.SetActive(true);  // 체력바 활성화
         bubbleText.text = "어디 한 번 막아보시지!";  // 말풍선 대사 설정
@@ -77,11 +84,13 @@ public class PunchGameScript : MonoBehaviour
             // 주먹 판정선이 주먹과 안맞으면 실패
             if (Input.GetKeyDown(randomKey) && newScale <= 54 && newScale >= 47f)
             {
+                audioSource.PlayOneShot(punchSound);
                 Pass();  // 성공
                 yield break;
             }
             else if(Input.anyKeyDown || newScale == 47f)
             {
+                audioSource.PlayOneShot(punchSound);
                 Fail();  // 실패
                 yield break;
             }
