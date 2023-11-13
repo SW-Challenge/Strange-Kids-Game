@@ -30,7 +30,7 @@ public class CalCulateCheckScript : MonoBehaviour
         int productScriptNumber = int.Parse(Regex.Replace(productScript, @"\D", ""));
 
         // 신분증과 손님의 얼굴이 동일할 시 
-        if (humanScriptNumber == humanCardScriptNumber || productScriptNumber == 3 || productScriptNumber == 4)
+        if ((humanScriptNumber == humanCardScriptNumber) && (productScriptNumber == 3 || productScriptNumber == 4))
         {
             String[] sayText = { "많이 파세요!", "감사합니다~", "수고하세요~!" };
             say.GetComponent<SayTextScript>().RandomSaid(sayText);
