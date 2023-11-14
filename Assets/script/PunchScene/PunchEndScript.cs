@@ -27,7 +27,7 @@ public class PunchEndScript : MonoBehaviour
             GameObject.FindObjectOfType<PunchGameScript>().jemmin.SetActive(true);  //잼민이 활성화
 
             if(GameObject.FindObjectOfType<PunchGameScript>().gaugeBarImage.fillAmount != 0){
-                content.text = "휴.. 잼민이의 주먹을 잘 피했다.\n잼민이도 앞으로 또 이러진 않겠지?";
+                content.text = "휴.. 초등학생의 주먹을 잘 막았다.\n앞으로 또 이러진 않겠지?";
             }else{
                 content.text = "내가 어린애한테 지다니...";
             }
