@@ -21,7 +21,8 @@ public class PunchGameScript : MonoBehaviour
     string[] passText = {"오;; 꽤 하는데?","지금까진 진심모드가 아니였어!","이젠 진짜 진심으로 때린다!!","크윽...."};
 
     AudioSource audioSource;
-    public AudioClip punchSound;
+    public AudioClip punchSound;  //슉 소리
+    public AudioClip whackSound;  //주먹 맞는 소리
 
     // 게임 시작 함수
     public void GameStart()
@@ -92,7 +93,7 @@ public class PunchGameScript : MonoBehaviour
             }
             else if(Input.anyKeyDown || newScale == 47f)
             {
-                audioSource.PlayOneShot(punchSound);
+                audioSource.PlayOneShot(whackSound);
                 Fail();  // 실패
                 yield break;
             }

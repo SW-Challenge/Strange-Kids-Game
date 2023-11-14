@@ -2792,6 +2792,7 @@ MonoBehaviour:
   jemmin: {fileID: 1678899057}
   count: 0
   punchSound: {fileID: 8300000, guid: eac8d1b5a43175d47b05ffc69e630971, type: 3}
+  whackSound: {fileID: 8300000, guid: 9a0aaebe4fbb80a419f3fc8b452025ff, type: 3}
 --- !u!82 &2139066077
 AudioSource:
   m_ObjectHideFlags: 0
