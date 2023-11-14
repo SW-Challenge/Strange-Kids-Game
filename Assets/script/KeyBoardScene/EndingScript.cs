@@ -11,7 +11,8 @@ using Random = UnityEngine.Random;
 public class EndingScript : MonoBehaviour
 {
     public GameObject panel;
-    int heart = 3;
+    public int heart = 3;
+    String text;
 
     void Start()
     {
@@ -21,5 +22,15 @@ public class EndingScript : MonoBehaviour
     public void SetActiveObject()
     {
         panel.SetActive(true);
+
+        if(heart == 2)
+        {
+            panel.transform.Find("content").GetComponent<TMP_Text>().text = "바르고 고운말 쓰는 모습 기대하겠습니다! \n 앞으로도 열심히 바른 국어 생활 파이팅~!";
+        }
+
+        else
+        {
+            panel.transform.Find("content").GetComponent<TMP_Text>().text = "바르고 고운말 쓰기로 우리 약속했잖아요!ㅠ \n 지금부터라도 열심히 타자치며 글의 뜻을 이해해보아요!";
+        }
     }
 }
