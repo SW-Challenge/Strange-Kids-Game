@@ -29,6 +29,7 @@ public class TypingSpeed : MonoBehaviour
     int heart = 3;
 
     String updateText;
+    String updateAfterText;
 
     String[] text = {
         "너를 만난 건 천운이야. 완벽한 타이밍에 널 만나게 되서 기뻐",
@@ -70,6 +71,8 @@ public class TypingSpeed : MonoBehaviour
         speedDisplay.text = "0"; // 초기 타자 속도 표시
         maxSpeedDisplay.text = "0"; // 초기 최고 타자 속도 표시
         startTime = Time.time; // 시작 시간 기록
+
+        StartCoroutine(DecaySpeed());
     }
 
     void Update()
@@ -98,7 +101,7 @@ public class TypingSpeed : MonoBehaviour
 
         if (totalTime > 0)
         {
-            totalChars -= (int)(decayRate * totalTime); // 시간에 따라 CPM 점차적으로 감소
+            totalChars -= (int)(decayRate * Time.deltaTime); // Time.deltaTime을 사용하여 1초마다 1씩 감소
             totalChars = Mathf.Max(totalChars, 0); // 음수 방지
         }
 
@@ -131,8 +134,9 @@ public class TypingSpeed : MonoBehaviour
             }
         }
 
-        if (userInputField.text.Length <= targetText.Length)
+        if (userInputField.text.Length <= targetText.Length && userInputField.text.Length != 0)
         {
+            updateText = "";
             for (int i = 0; i < userInputField.text.Length; i++)
             {
                 if (userInputField.text[i] == targetText[i])
@@ -145,14 +149,15 @@ public class TypingSpeed : MonoBehaviour
                     SetTextColor(i, Color.red);
                 }
 
-                GameObject.Find("game_input").GetComponent<TMP_Text>().text = updateText;
             }
+            GameObject.Find("game_input").GetComponent<TMP_Text>().text = updateText + updateAfterText;
         }
     }
 
     void SetTextColor(int index, Color color)
     {
-        updateText = $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>{targetText[index]}</color>" + targetText.Substring(index + 1);
+        updateText += $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>{targetText[index]}</color>";
+        updateAfterText = targetText.Substring(index + 1);
     }
 
     float CalculateCPM(int characters, float time)
@@ -160,5 +165,15 @@ public class TypingSpeed : MonoBehaviour
         float adjustedChars = characters - (errors * errorPenalty);
         float charsPerMinute = adjustedChars / (time / 60);
         return charsPerMinute + 200;
+    }
+
+    IEnumerator DecaySpeed()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.01f);
+            totalChars -= 3;
+            totalChars = Mathf.Max(totalChars, 0);
+        }
     }
 }
