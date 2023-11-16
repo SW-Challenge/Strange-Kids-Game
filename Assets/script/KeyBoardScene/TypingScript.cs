@@ -26,8 +26,6 @@ public class TypingSpeed : MonoBehaviour
     private float lastUpdateTime = 0f;
     private int cnt = 0;
 
-    int hp = 3;
-
     String updateText;
     String updateAfterText;
 
@@ -121,17 +119,14 @@ public class TypingSpeed : MonoBehaviour
 
                 if (userInputField.text != targetText)
                 {
-                    hp = GameObject.Find("EventSystem").GetComponent<EndingScript>().heart;
-                    hp--;
+                    GameObject.Find("EventSystem").GetComponent<EndingScript>().heart--;
 
-                    GameObject.Find("EventSystem").GetComponent<EndingScript>().heart = hp;
-
-                    if(hp == 2)
+                    if(GameObject.Find("EventSystem").GetComponent<EndingScript>().heart == 2)
                     {
                         GameObject.Find("heart (2)").SetActive(false);
                     }
 
-                    else if(hp == 1)
+                    else if(GameObject.Find("EventSystem").GetComponent<EndingScript>().heart == 1)
                     {
                         GameObject.Find("heart (1)").SetActive(false);
                     }
@@ -142,6 +137,8 @@ public class TypingSpeed : MonoBehaviour
                         GameObject.Find("EventSystem").GetComponent<EndingScript>().SetActiveObject();
                     }
                 }
+
+                GameObject.Find("EventSystem").GetComponent<ArrowScript>().Arrow();
 
                 cnt++;
                 targetText = text[cnt];
