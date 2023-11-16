@@ -16,9 +16,10 @@ public class LoadScene1 : MonoBehaviour
     {
         clearEvent = GameObject.Find("SaveData").GetComponent<SaveClearData>();
 
-        Debug.Log(clearEvent.clear1);
-        Debug.Log(clearEvent.clear2);
-        Debug.Log(clearEvent.clear3);
+        if (clearEvent.clear1 && clearEvent.clear2 && clearEvent.clear3)
+        {
+            GameObject.Find("EventSystem").GetComponent<EndingScript1>().SetObject();
+        }
 
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
