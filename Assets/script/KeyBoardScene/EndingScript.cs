@@ -22,6 +22,7 @@ public class EndingScript : MonoBehaviour
     public void SetActiveObject()
     {
         panel.SetActive(true);
+        GameObject.Find("SaveData").GetComponent<SaveClearData>().clear3 = true;
 
         if(heart == 2)
         {
@@ -30,6 +31,7 @@ public class EndingScript : MonoBehaviour
 
         else
         {
+            GameObject.Find("SaveData").GetComponent<SaveClearData>().clear--;
             panel.transform.Find("content").GetComponent<TMP_Text>().text = "바르고 고운말 쓰기로 우리 약속했잖아요!ㅠ \n 지금부터라도 열심히 타자치며 글의 뜻을 이해해보아요!";
         }
     }

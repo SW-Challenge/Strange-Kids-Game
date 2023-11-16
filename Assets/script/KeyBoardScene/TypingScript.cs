@@ -43,22 +43,6 @@ public class TypingSpeed : MonoBehaviour
 "모든 시련은 결국에는 축복이 되기 마련이다.",
 "웃음은 전염된다. 웃음은 감염된다. 이 둘은 당신의 건강에 좋다.",
 "아무것도 시도할 용기를 갖지 못한다면 인생은 대체 무엇이겠는가?",
-"미래는 자신이 가진 꿈의 아름다움을 믿는 자의 것이다.",
-"나는 내가 더 노력할수록 운이 더 좋아진다는 걸 발견했다.",
-"사랑은 인생에서 가장 훌륭한 치유제다.",
-"우리의 인생은 우리가 노력한 만큼 가치가 있다.",
-"믿음은 산산이 조각난 세상을 빛으로 나오게 하는 힘이다.",
-"우연이 아닌 선택이 운명을 결정한다.",
-"남을 행복하게 하는 것은 향수를 뿌리는 것과 같다.",
-"뿌릴 때 자기에게도 몇 방울 정도는 묻기 때문이다.",
-"강인하고 긍정적인 태도는 그 어떤 특효약보다 더 많은 기적을 만들어 낸다.",
-"낭비한 시간에 대한 후회는 더 큰 시간의 낭비이다.",
-"지금 최선을 다하면 미래는 알아서 잘 풀릴 것이다.",
-"인생의 목적과 그것을 성취하는 방법을 깨닫는 것, 그것이 바로 지혜다.",
-"행복은 밖에서 오지 않는다. 행복은 우리들 마음속에서 우러난다.",
-"행복이란 삶의 의미이자 목적이요, 인간 존재의 총체적 목표이자 끝이다.",
-"인생의 흐름을 지켜보지 말고 그 속에 뛰어들어라.",
-"용기란 자신이 두려워하는 것을 하는 것이다. 즉 두려움이 없으면 용기도 없다."
     };
 
     void Start()
@@ -114,8 +98,6 @@ public class TypingSpeed : MonoBehaviour
                 }
 
                 userInputField.text = userInputField.text.Substring(0, userInputField.text.Length - 2) + userInputField.text.Substring(userInputField.text.Length - 2).Replace(" ", "");
-                Debug.Log(userInputField.text);
-                Debug.Log(targetText);
 
                 if (userInputField.text != targetText)
                 {

@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
+using System.Net;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 using TMPro;
 
 public class PunchEndScript : MonoBehaviour
@@ -25,15 +29,22 @@ public class PunchEndScript : MonoBehaviour
             GameObject.FindObjectOfType<PunchGameScript>().gaugeBar.SetActive(false);  // 게이지바 비활성화
             GameObject.FindObjectOfType<PunchGameScript>().jemminAni.SetActive(false);  //잼민이 애니메이션 비활성화
             GameObject.FindObjectOfType<PunchGameScript>().jemmin.SetActive(true);  //잼민이 활성화
+            GameObject.Find("SaveData").GetComponent<SaveClearData>().clear1 = true;
 
-            if(GameObject.FindObjectOfType<PunchGameScript>().gaugeBarImage.fillAmount >= 0.3){
+            if (GameObject.FindObjectOfType<PunchGameScript>().gaugeBarImage.fillAmount >= 0.3)
+            {
                 content.text = "휴.. 초등학생의 주먹을 잘 막았다.\n앞으로 또 이러진 않겠지?";
-            }else{
+            }
+            else
+            {
+                GameObject.Find("SaveData").GetComponent<SaveClearData>().clear--;
                 content.text = "내가 어린애한테 지다니...";
             }
 
             endPanel.SetActive(true);
-        }else{
+        }
+        else
+        {
             GameObject.FindObjectOfType<PunchGameScript>().StartCoroutine("RandomDelayedSpawn");
         }
     }
