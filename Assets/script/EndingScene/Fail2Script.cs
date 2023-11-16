@@ -25,7 +25,7 @@ public class Fail2Script : MonoBehaviour
     void Start()
     {
         goPanel.SetActive(false);
-        Destroy(GameObject.Find("FailPanel"),2);  // "실패" 2초 뒤 제거
+        Destroy(GameObject.Find("FailPanel"),2);  // 실패 패널 2초 뒤 제거
         Invoke("PlayNextClip", 2f);
     }
 
