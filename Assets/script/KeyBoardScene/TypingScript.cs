@@ -39,10 +39,7 @@ public class TypingSpeed : MonoBehaviour
 "꿈은 도망가지 않아, 도망가는 건 언제나 자기 자신이지.",
 "누구나 재능은 있다. 드문 것은 그 재능이 이끄는 암흑 속으로 따라 들어갈 용기다.",
 "계획은 무슨! 계획대로 안되는 게 인생이란거야.",
-"너의 길을 가라. 남들이 무엇이라 하든지. 내버려두라.",
-"모든 시련은 결국에는 축복이 되기 마련이다.",
 "웃음은 전염된다. 웃음은 감염된다. 이 둘은 당신의 건강에 좋다.",
-"아무것도 시도할 용기를 갖지 못한다면 인생은 대체 무엇이겠는가?",
     };
 
     void Start()
@@ -92,7 +89,7 @@ public class TypingSpeed : MonoBehaviour
         {
             if (userInputField.text.Length >= targetText.Length)
             {
-                if(cnt == 27)
+                if(cnt == 9)
                 {
                     GameObject.Find("EventSystem").GetComponent<EndingScript>().SetActiveObject();
                 }
