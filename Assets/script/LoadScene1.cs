@@ -15,12 +15,7 @@ public class LoadScene1 : MonoBehaviour
     public void LoadGame(int load)
     {
         clearEvent = GameObject.Find("SaveData").GetComponent<SaveClearData>();
-
-        if (clearEvent.clear1 && clearEvent.clear2 && clearEvent.clear3)
-        {
-            GameObject.Find("EventSystem").GetComponent<EndingScript1>().SetObject();
-        }
-
+        
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (clearEvent.clear1 && load == 3) return;
@@ -29,5 +24,34 @@ public class LoadScene1 : MonoBehaviour
         }
 
         SceneManager.LoadScene(load);
+        
+    }
+
+    void Update()
+    {
+        clearEvent = GameObject.Find("SaveData").GetComponent<SaveClearData>();
+
+        if (clearEvent.clear1 && clearEvent.clear2 && clearEvent.clear3)
+            GameObject.Find("EventSystem").GetComponent<EndingScript1>().SetObject();
+    }
+
+    public void EndingGame()
+    {
+        clearEvent = GameObject.Find("SaveData").GetComponent<SaveClearData>();
+
+        if(clearEvent.clear == 3)
+        {
+            SceneManager.LoadScene(10);
+        }
+
+        else if (clearEvent.clear == 2)
+        {
+            SceneManager.LoadScene(8);
+        }
+
+        else
+        {
+            SceneManager.LoadScene(9);
+        }
     }
 }
