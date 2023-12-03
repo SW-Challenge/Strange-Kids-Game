@@ -1,6 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
+using TMPro;
 
 public class SaveClearData : MonoBehaviour
 {
@@ -14,10 +20,20 @@ public class SaveClearData : MonoBehaviour
 
     void Awake()
     {
-        var obj = FindObjectsOfType<SaveClearData>();
-        if (obj.Length == 1)
-            DontDestroyOnLoad(gameObject);
+        // 변수 초기화
+        clear1 = false;
+        clear2 = false;
+        clear3 = false;
+        clear = 3;
+        loadVisible = false;
         
+        var obj = FindObjectsOfType<SaveClearData>();
+        
+        if (obj.Length == 1)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
         else
             Destroy(gameObject);
     }

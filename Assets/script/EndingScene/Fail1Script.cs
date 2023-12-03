@@ -47,6 +47,11 @@ public class Fail1Script : MonoBehaviour
         }
         else
         {
+            GameObject.Find("SaveData").GetComponent<SaveClearData>().clear1 = false;
+            GameObject.Find("SaveData").GetComponent<SaveClearData>().clear2 = false;
+            GameObject.Find("SaveData").GetComponent<SaveClearData>().clear3 = false;
+            GameObject.Find("SaveData").GetComponent<SaveClearData>().clear = 3;
+
             goPanel.SetActive(true);
         }
     }
